@@ -1,0 +1,21 @@
+html
+  head
+    title DTD-Launcher
+    link(rel="stylesheet",type="text/css",href="/dtd-style1.css")
+
+  body
+    if info
+      each x,i in info
+        p= x
+    if errors
+      each x,i in errors
+        p= x
+
+    .launcher
+      a.launcher-heading(href="/") +__+ &nbsp NEW &nbsp +__+
+      
+      h3.launcher-heading Existing Files
+      
+      .existing-filelist 
+        each f, i in existing_filelist
+          a.launcher-option(href=f.link)= f.name
