@@ -1,0 +1,92 @@
+*,*:after, *:before {
+    box-sizing: border-box;
+}
+
+a{
+  color: black;
+  text-decoration: none;
+  background: #E8FFE8;
+}
+
+.launcher{
+  display: grid;
+  justify-content: stretch;
+}
+
+.launcher-heading{
+  background: #E0E0FF;
+  display: block;
+  text-align: center;
+  border: 1px solid;
+  border-radius: 10px; /*make the dimensions responsive*/
+  padding: 10px; /*make the dimensions responsive*/
+  margin: 10px; /*make the dimensions responsive*/
+}
+
+.existing-filelist{
+  display: grid;
+  grid-template-columns: auto auto auto
+}
+
+.launcher-option{
+  place-self: strech;
+  margin: 10px; /*make the dimensions responsive*/
+  padding: 10px; /*make the dimensions responsive*/
+  border-radius: 10px; /*make the dimensions responsive*/
+  border: 1px solid;
+  text-align: center;
+}
+
+#preview-layout{
+  display: none;
+}
+
+.centered-bar-heading{
+  font-size: 20px;
+  width: 100%;
+  text-align: center;
+  border: 1px solid black;
+  padding: 10px; /*make the dimensions responsive*/
+}
+
+.two-column-form{
+  border: 1px solid black;
+  display: grid;
+  grid-template-columns: [one] auto [two] auto
+}
+
+.two-column-form-label, .two-column-form-input{
+  border: 1px solid black;
+  margin: 5px;
+  padding: 5px;
+  place-self: stretch;
+  text-align: center;
+}
+
+.two-column-form-label::after{
+  float: right;
+  content: ":";
+}
+
+.two-column-form-label{
+  grid-column-start: one;
+  border-radius: 10px 0 0 10px;
+}
+
+.two-column-form-input{
+  grid-column-start: two;
+  border-radius: 0 10px 10px 0;
+}
+
+.two-column-form-submit-button{
+  border: 1px solid black;
+  border-radius: 10px;
+  margin: 5px;
+  padding: 5px;
+  grid-column-start: one;
+  grid-column-end: 3;
+}
+
+.full-width-button{
+  width: 100%;
+}

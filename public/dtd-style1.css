@@ -1,39 +1,38 @@
 *,*:after, *:before {
     box-sizing: border-box;
-    //font-size: 15px;
 }
 
-a{
-  color: black;
-  text-decoration: none;
-  background: #E8FFE8;
-}
-
-.launcher{
+#dtd-holder{
+  min-height: 100vh;
   display: grid;
-  justify-content: stretch;
+  grid-template-columns: 50px 1fr 45px;
+  grid-template-areas:
+    "overall-heading board control-bar"
 }
 
-.launcher-heading{
-  background: #E0E0FF;
-  display: block;
+#overall-heading{
+  grid-area: overall-heading;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
   text-align: center;
-  border: 1px solid;
-  border-radius: 10px; /*make the dimensions responsive*/
-  padding: 10px; /*make the dimensions responsive*/
-  margin: 10px; /*make the dimensions responsive*/
+  background: linear-gradient(90deg,lightgray,white);
+  margin: 0;
+
 }
 
-.existing-filelist{
+#control-bar{
+  grid-area: control-bar;
+  background: linear-gradient(-90deg,lightgray,white);
+  margin: 0;
+}
+
+#board{
+  grid-area: board;
   display: grid;
-  grid-template-columns: auto auto auto
 }
 
-.launcher-option{
-  place-self: strech;
-  margin: 10px; /*make the dimensions responsive*/
-  padding: 10px; /*make the dimensions responsive*/
-  border-radius: 10px; /*make the dimensions responsive*/
-  border: 1px solid;
-  text-align: center;
+.dtd-cell{
+  place-self: stretch;
+  background: lightgray;
+  margin: 1px;
 }
