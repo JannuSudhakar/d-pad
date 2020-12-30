@@ -7,12 +7,20 @@ const DTDSchema = mongoose.Schema({
   "num-columns": Number,
   "preferred-stylesheet": String,
   "base-style": String,
+  "rack-details":{
+    "rack-name": String,
+    "parent-dtd-url": String,
+    "continuation-dtd-url": String
+  },
   cells: [
     {
       "cell-type": String,
       "inline-style": String,
       "content": String,
-      "hyperlink": String
+      "continuation-dtd": {
+        "address-protocol": String;
+        "address": String;
+      }
     }
   ]
 });

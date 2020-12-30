@@ -43,6 +43,8 @@ a{
 
 .centered-bar-heading{
   font-size: 20px;
+  border-radius: 0 20px 0 20px;
+  background: linear-gradient(lightgray, white);
   width: 100%;
   text-align: center;
   border: 1px solid black;
@@ -85,8 +87,14 @@ a{
   padding: 5px;
   grid-column-start: one;
   grid-column-end: 3;
+  border-radius: 0 10px 0 10px;
+  margin-left: 25%;
+  margin-right: 25%;
 }
 
 .full-width-button{
+  border: 1px solid black;
+  border-radius: 10px;
   width: 100%;
+  padding: 5px;
 }

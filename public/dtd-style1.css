@@ -12,7 +12,7 @@
 
 #overall-heading{
   grid-area: overall-heading;
-  writing-mode: vertical-rl;
+  writing-mode: vertical-lr;
   text-orientation: mixed;
   text-align: center;
   background: linear-gradient(90deg,lightgray,white);
