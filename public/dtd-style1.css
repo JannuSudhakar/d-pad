@@ -2,6 +2,10 @@
     box-sizing: border-box;
 }
 
+body{
+  margin: 0;
+  padding: 0;
+}
 #dtd-holder{
   min-height: 100vh;
   display: grid;
@@ -22,6 +26,8 @@
 
 #control-bar{
   grid-area: control-bar;
+  display: grid;
+  grid-template-rows: auto;
   background: linear-gradient(-90deg,lightgray,white);
   margin: 0;
 }
@@ -34,5 +40,42 @@
 .dtd-cell{
   place-self: stretch;
   background: lightgray;
-  margin: 1px;
+  margin: 5px;
+  border-radius: 10px;
+  font-family: monospace;
+}
+
+.dtd-cell.dtd-cell-clickable{
+  border: 2px solid orange;
+  outline-offset: -10px;
+  outline: 2px dashed orange;
+}
+
+.dtd-cell.dtd-cell-selected{
+  border: 2px solid orange;
+  outline-offset: -10px;
+  outline: 2px dashed green;
+}
+
+.dtd-cell.dtd-cell-being-edited{
+  border: 2px solid green;
+}
+
+.control-button{
+  place-self: stretch;
+  padding: 0;
+  border: 1px solid gray;
+  border-radius: 5px;
+}
+
+.control-button:disabled{
+  background: lightgray;
+}
+
+.cell-marker{
+  border: 1px solid orange;
+}
+
+.dtd-cell > p{
+  margin: 10px;
 }

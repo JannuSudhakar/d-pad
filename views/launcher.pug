@@ -1,6 +1,6 @@
 html
   head
-    title DTD-Launcher
+    title D-Pad-Launcher
     link(rel="stylesheet",type="text/css",href="/peripheral-style1.css")
 
   body
@@ -17,5 +17,7 @@ html
       h3.launcher-heading Existing Files
       
       .existing-filelist 
+        if(existing_filelist.length == 0)
+          p.spanning-message.launcher-option No Files Yet
         each f, i in existing_filelist
           a.launcher-option(href=f.link)= f.name

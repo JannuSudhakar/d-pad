@@ -35,16 +35,14 @@ app.use(bodyParser.urlencoded({extended: false}));
 //   saveUninitialized: true
 // }));
 
-app.get('/',function(req,res){
-    res.render('launcher',{existing_filelist:[
-      {name:"file2", link:"/"},
-      {name:"file3", link:"/"},
-      {name:"file4", link:"/"},
-      {name:"file5", link:"/"},
-      {name:"file6", link:"/"},
-      {name:"file7", link:"/"},
-      {name:"file8", link:"/"}
-    ]});
+app.get('/',async function(req,res){
+    const filelist = await DTDFile.find({},{name: 1, url: 1});
+    //console.log(filelist);
+    existing_filelist = filelist.map(function(dtd){
+      return {name: dtd.name, link: "/pad/internal/"+dtd.url}
+    });
+    //console.log(existing_filelist)
+    res.render('launcher',{existing_filelist:existing_filelist});
 });
 
 app.get('/new-file',function(req,res){
@@ -54,13 +52,19 @@ app.get('/new-file',function(req,res){
 app.post('/new-file',async function(req,res){
   try{
     const newFile = new DTDFile(await generateBaseTemplate(req.body));
+    uuid = newFile.uuid;
     await newFile.save();
+    res.redirect(`/pad/internal/${newFile.uuid}`);
   }
   catch(err){
     console.log(err);
+    //req.flash("error","oops, something went wrong...");
+    res.redirect('/new-file');
   }
-  res.redirect('/');
 })
+
+app.use('/pad',require('./routes/pad'));
+app.use('/edit',require('./routes/edit'));
 
 const port = process.env.PORT || 8000
 

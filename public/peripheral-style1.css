@@ -29,12 +29,19 @@ a{
 }
 
 .launcher-option{
-  place-self: strech;
+  place-self: stretch;
   margin: 10px; /*make the dimensions responsive*/
   padding: 10px; /*make the dimensions responsive*/
   border-radius: 10px; /*make the dimensions responsive*/
   border: 1px solid;
   text-align: center;
+}
+
+.spanning-message{
+  grid-column-start: 1;
+  grid-column-end: -1;
+  margin-left: 25%;
+  margin-right: 25%;
 }
 
 #preview-layout{

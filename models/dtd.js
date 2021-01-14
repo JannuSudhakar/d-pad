@@ -14,12 +14,17 @@ const DTDSchema = mongoose.Schema({
   },
   cells: [
     {
+      uid: String,
+      "grid-column-start": Number,
+      "grid-row-start": Number,
+      "grid-column-end": Number,
+      "grid-row-end": Number,
       "cell-type": String,
       "inline-style": String,
       "content": String,
       "continuation-dtd": {
-        "address-protocol": String;
-        "address": String;
+        "address-protocol": String,
+        "address": String,
       }
     }
   ]
