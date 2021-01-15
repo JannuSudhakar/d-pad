@@ -220,19 +220,23 @@ html
       if(cellEditState){
         setCellClickableIndicator(true);
       }
-      else{
+      else if(cellBeingEdited != ""){
         var content = document.getElementById(`edit-${cellBeingEdited}`).innerHTML;
         content = content.replace("<br>","\n");
         toggleLoadingScreen();
         responseText = await sendPOST(`/edit/edit/${dtd_url}`,`cellUID=${cellBeingEdited}&content=${encodeURIComponent(content)}`);
         if(JSON.parse(responseText).error){
           toggleLoadingScreen();
+          toggleDisableOnControlButtons();
           window.alert("the edit cell operation failed :(");
           cellBeingEdited = "";
         }
         else{
           location.reload();
         }
+      }
+      else{
+        toggleDisableOnControlButtons();
       }
     }
     
