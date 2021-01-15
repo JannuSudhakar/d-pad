@@ -7,6 +7,9 @@ const bodyParser = require('body-parser');
 const dbconfig = require('./config/database');
 const { v4: uuidv4 } = require('uuid');
 
+const {nouns,adjectives} = require('./utils/globals');
+const {chooseRand} = require('./utils/misc-functions');
+
 DTDFile = require('./models/dtd.js');
 
 mongoose.connect(dbconfig.database);
@@ -46,7 +49,8 @@ app.get('/',async function(req,res){
 });
 
 app.get('/new-file',function(req,res){
-  res.render('new-file');
+  const randName = chooseRand(adjectives) + " " + chooseRand(nouns);
+  res.render('new-file',{randName: randName});
 })
 
 app.post('/new-file',async function(req,res){
