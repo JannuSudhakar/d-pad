@@ -31,8 +31,10 @@ html
           
         label.two-column-form-label grid columns
         input.two-column-form-input#grid-columns(type="number",name="grid-columns",value=20)
-          
-        button.two-column-form-submit-button(type="submit" value="Submit") ~~let's go!!~~
+        
+        button.two-column-form-spanning-button(type="submit",value="Submit") ~~let's go!!~~
+        
+        button.two-column-form-spanning-button(type="button",value="cancel",onclick="goHome()") 😥😔cancel, let's go back home😔😥
       
       button.full-width-button(onclick="preview()") preview
         
@@ -42,6 +44,10 @@ html
     document.getElementById("name").value = randName;
     document.getElementById("grid-rows").value = 20;
     document.getElementById("grid-columns").value = 20;
+    
+    function goHome(){
+      window.location.href = "/";
+    }
     
     function validateForm(){
       var errorText = "";

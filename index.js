@@ -56,9 +56,8 @@ app.get('/new-file',function(req,res){
 app.post('/new-file',async function(req,res){
   try{
     const newFile = new DTDFile(await generateBaseTemplate(req.body));
-    uuid = newFile.uuid;
     await newFile.save();
-    res.redirect(`/pad/internal/${newFile.uuid}`);
+    res.redirect(`/pad/internal/${newFile.url}`);
   }
   catch(err){
     console.log(err);

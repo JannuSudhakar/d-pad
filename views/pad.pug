@@ -24,6 +24,7 @@ html
     #dtd-holder
       h1#overall-heading #{dtd.name}
       #control-bar
+        button.control-button(type="button",onclick="goHome()") 🏠
         button.control-button#new-cell-button(data-activity-indicator="➕",data-return-indicator="✔️",type="button",onclick="newCell(this)") ➕
         button.control-button(data-activity-indicator="🖋️",data-return-indicator="✔️",type="button",onclick="editCell(this)") 🖋️
         button.control-button(data-activity-indicator="⛏️",data-return-indicator="✔️",type="button",onclick="repositionCell(this)") ⛏️
@@ -139,6 +140,10 @@ html
           cells[i].classList.remove("dtd-cell-selected");
         }
       }
+    }
+    
+    function goHome(){
+      window.location.href = "/";
     }
     
     async function newCell(x){
