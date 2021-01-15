@@ -80,6 +80,7 @@ app.listen(port,function(){
 
 async function generateBaseTemplate(body){
   //TODO:  make sure that the filename doesn't clash.
+  //TODO:  implement sanity checks for the fields.
   return {
     "name": body["name"],
     "url": uuidv4(),
