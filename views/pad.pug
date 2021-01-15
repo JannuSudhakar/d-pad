@@ -179,7 +179,7 @@ html
       endRow = Math.max(rowSet1,rowSet2);
       startCol = Math.min(colSet1,colSet2);
       endCol = Math.max(colSet1,colSet2);
-      for(var i = 1; i <= nu_rows; i++){
+      for(var i = 1; i <= num_rows; i++){
         for(var j = 1; j <= num_columns; j++){
           document.getElementById(`row-${i}-col-${j}`).style.backgroundColor = (startRow <= i && i <= endRow && startCol <= j && j <= endCol) ? "#ffe4b578" : "transparent";
           document.getElementById(`row-${i}-col-${j}`).style.outline = "none";
