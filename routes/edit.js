@@ -122,4 +122,21 @@ router.post('/remove/*',async function(req,res){
   }
 })
 
+router.delete('/delete/*',async function(req,res){
+  try{
+    const url = req.url.substr(8);
+    console.log(url);
+    dtd = await DTDFile.deleteOne({url: url});
+    res.json({
+      error: false
+    })
+  }
+  catch(err){
+    console.log(err);
+    res.json({
+      error: true
+    })
+  }
+
+})
 module.exports = router;

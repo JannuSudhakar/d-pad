@@ -29,6 +29,7 @@ html
         button.control-button(data-activity-indicator="⛏️",data-return-indicator="✔️",type="button",onclick="repositionCell(this)") ⛏️
         button.control-button(data-activity-indicator="✖️",data-return-indicator="☠️",type="button",onclick="removeCell(this)") ✖️
         button.control-button(type="button") ▶
+        button.control-button(type="button", onclick="deleteFile()") 🗑️
       #board
         for cell,i in dtd.cells
           div.dtd-cell(id=`cell-${cell.uid}`,style=cell.inlineStyle,onclick="clickCell(this)")
@@ -273,4 +274,28 @@ html
         setCellClickableIndicator(false);
         cell.classList.add("dtd-cell-selected");
       }
+    }
+    
+    function deleteFile(){
+      if(window.confirm("-------------☠️💀Hey there heads up💀☠️-------------\n☠️🦴💀this will permanently delete this file💀🦴☠️")){
+        xhttp = new window.XMLHttpRequest();
+        xhttp.open("DELETE",`/edit/delete/${dtd_url}`);
+        toggleLoadingScreen();
+        xhttp.onreadystatechange = function(){
+          if(this.readyState == 4 && this.status == 200){
+            toggleLoadingScreen();
+            if(JSON.parse(this.responseText).error){
+              window.alert("there was an error deleting the file.\nfile: whew, that was a close one 😎");
+            }
+            else{
+              window.location.href = "/";
+            }
+          }
+        }
+        xhttp.send();
+      }
+      else{
+        window.alert("you have chosen to not delete this file.")
+      }
+      
     }
