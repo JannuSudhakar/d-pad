@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const preprocess = require('../utils/preprocess-dtd');
+const {generateUserStamp} = require('../utils/meta-data-functions');
 const {validCellTypes} = require('../utils/globals');
 const { v4: uuidv4 } = require('uuid');
 const assert = require('assert');
@@ -27,6 +28,7 @@ router.post('/create/*',async function(req,res){
       dtd.cells = [];
     }
     dtd.cells.push({
+      "last-edited-by": generateUserStamp(req),
       uid: uuidv4(),
       "cell-type": cellType,
       "content": "",
@@ -67,6 +69,7 @@ router.post('/reposition/*',async function(req,res){
     dtd.cells[index]["grid-row-start"] = rowStart;
     dtd.cells[index]["grid-column-end"] = colEnd;
     dtd.cells[index]["grid-row-end"] = rowEnd;
+    dtd.cells[index]["last-edited-by"] = generateUserStamp(req)
     await dtd.save();
     res.json({
       error: false
@@ -88,6 +91,7 @@ router.post('/edit/*',async function(req,res){
       return cell.uid == req.body.cellUID;
     })
     dtd.cells[index].content = req.body.content;
+    dtd.cells[index]["last-edited-by"] = generateUserStamp(req);
     await dtd.save();
     res.json({
       error: false

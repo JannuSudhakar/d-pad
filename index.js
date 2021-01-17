@@ -55,7 +55,7 @@ app.get('/new-file',function(req,res){
 
 app.post('/new-file',async function(req,res){
   try{
-    const newFile = new DTDFile(await generateBaseTemplate(req.body));
+    const newFile = new DTDFile(await generateBaseTemplate(req.body,req));
     await newFile.save();
     res.redirect(`/pad/internal/${newFile.url}`);
   }
@@ -77,10 +77,15 @@ app.listen(port,function(){
 
 //-------------will probably be refactored into a utils file------------------//
 
-async function generateBaseTemplate(body){
+async function generateBaseTemplate(body,req){
   //TODO:  make sure that the filename doesn't clash.
   //TODO:  implement sanity checks for the fields.
+  console.log(body["your-name"],req.connection.remoteAddress);
   return {
+    "created-by":{
+      name: body["your-name"],
+      "ip-address": req.connection.remoteAddress
+    },
     "name": body["name"],
     "url": uuidv4(),
     "num-rows": body["grid-rows"],

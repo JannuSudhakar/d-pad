@@ -32,6 +32,9 @@ html
         label.two-column-form-label grid columns
         input.two-column-form-input#grid-columns(type="number",name="grid-columns",value=20)
         
+        label.two-column-form-label your name (will no longer be required once I implement accounts)
+        input.two-column-form-input#your-name(type="text",name="your-name")
+        
         button.two-column-form-spanning-button(type="submit",value="Submit") ~~let's go!!~~
         
         button.two-column-form-spanning-button(type="button",value="cancel",onclick="goHome()") 😥😔cancel, let's go back home😔😥
@@ -59,6 +62,9 @@ html
       }
       if(document.getElementById("grid-columns").value <= Number(0)){
         errorText += "the grid-columns field has to be atleast 1.\n";
+      }
+      if(document.getElementById("your-name").value == ""){
+        errorText += "please enter your name so that I know who is using this site."
       }
       if(errorText != ""){
         window.alert(errorText);
