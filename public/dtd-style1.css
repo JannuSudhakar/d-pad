@@ -38,6 +38,7 @@ body{
 }
 
 .dtd-cell{
+  overflow: auto;
   place-self: stretch;
   background: lightgray;
   margin: 5px;

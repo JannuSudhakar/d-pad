@@ -3,8 +3,8 @@ const {validCellTypes} = require('./globals');
 function preprocess(dtd){
   style = `
   #board{
-    grid-template-rows: repeat(${dtd['num-rows']},1fr);
-    grid-template-columns: repeat(${dtd['num-columns']},1fr);
+    grid-template-rows: repeat(${dtd['num-rows']},${100/dtd['num-rows']}%);
+    grid-template-columns: repeat(${dtd['num-columns']},${100/dtd['num-columns']}%);
   }
   ${dtd['base-style']}
   `;
