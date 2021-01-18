@@ -39,7 +39,7 @@ html
         while i < dtd["num-columns"]*dtd["num-rows"]
           - row = i%dtd["num-rows"] + 1;
           - column = Math.trunc(i/dtd["num-rows"]) + 1;
-          div(class="cell-marker",onclick=`setCellCorner(${row},${column})`,id=`row-${row}-col-${column}`,style=`grid-row-start: ${row}; grid-column-start: ${column};outline-offset: -3px;`)
+          div(class="cell-marker",onclick=`setCellCorner(${row},${column})`,id=`row-${row}-col-${column}`,style=`grid-row-start: ${row}; grid-column-start: ${column};`)
           - i++;
   script.
     dtd_url = "!{dtd.url}";

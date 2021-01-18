@@ -41,9 +41,15 @@ body{
   overflow: auto;
   place-self: stretch;
   background: lightgray;
+  border: 1px solid gray;
   margin: 5px;
   border-radius: 10px;
   font-family: monospace;
+}
+
+.cell-marker{
+  outline-offset: -3px;
+  z-index: 1000000;
 }
 
 .dtd-cell.dtd-cell-clickable{
