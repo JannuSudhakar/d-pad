@@ -23,7 +23,7 @@ function preprocess(dtd){
         return {
           uid: cell.uid,
           inlineStyle: inlineStyle,
-          content: `<p id=edit-${cell.uid}>${cell.content.replace('\n','<br>')}</p>` //TODO IMPORTANT: implement escaping
+          content: `<p id=edit-${cell.uid}>${cell.content.replace(/\n/g,'<br>')}</p>` //TODO IMPORTANT: implement escaping
         };
       }
     }

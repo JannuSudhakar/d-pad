@@ -222,7 +222,9 @@ html
       }
       else if(cellBeingEdited != ""){
         var content = document.getElementById(`edit-${cellBeingEdited}`).innerHTML;
-        content = content.replace("<br>","\n");
+        content = content.replace(/<br>/g,"\n");
+        content = content.replace(/<div>/g,"\n");
+        content = content.replace(/<\/div>/g,"");
         toggleLoadingScreen();
         responseText = await sendPOST(`/edit/edit/${dtd_url}`,`cellUID=${cellBeingEdited}&content=${encodeURIComponent(content)}`);
         if(JSON.parse(responseText).error){

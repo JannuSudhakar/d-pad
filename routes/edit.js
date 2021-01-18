@@ -90,7 +90,7 @@ router.post('/edit/*',async function(req,res){
     index = dtd.cells.findIndex(function(cell){
       return cell.uid == req.body.cellUID;
     })
-    dtd.cells[index].content = req.body.content;
+    dtd.cells[index].content = req.body.content.replace(/</g,"&lt;").replace(/>/g,"&gt;");
     dtd.cells[index]["last-edited-by"] = generateUserStamp(req);
     await dtd.save();
     res.json({
@@ -129,7 +129,7 @@ router.post('/remove/*',async function(req,res){
 router.delete('/delete/*',async function(req,res){
   try{
     const url = req.url.substr(8);
-    console.log(url);
+    console.log("deleting", url);
     dtd = await DTDFile.deleteOne({url: url});
     res.json({
       error: false
