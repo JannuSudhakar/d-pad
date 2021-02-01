@@ -28,6 +28,7 @@ function toggleLoadingScreen(forceState){
 }
 
 function toggleDisableOnControlButtons(x){
+  //pass nothing to this function to activate all buttons.
   buttons = document.getElementsByClassName('control-button');
   if(x){
     for(var i = 0; i < buttons.length; i++){
@@ -166,7 +167,8 @@ async function repositionCell(x){
   toggleIcon(x);
 }
 
-async function editCell(x){
+async function editCell(){
+  x = document.getElementById('edit-cell-button');
   toggleDisableOnControlButtons(x);
   toggleIcon(x);
   cellEditState = !cellEditState;
@@ -191,6 +193,7 @@ async function editCell(x){
     }
   }
   else{
+    window.alert(cellBeingEdited);
     toggleDisableOnControlButtons();
     setCellClickableIndicator();
   }
@@ -201,19 +204,26 @@ async function removeCell(x){
   toggleIcon(x);
   removeState = !removeState
   if(removeState){
+    cellBeingRemoved = "";
     setCellClickableIndicator(true);
   }
-  else{
+  else if(cellBeingRemoved != ""){
     toggleLoadingScreen();
     responseText = await sendPOST(`/edit/remove/${dtd_url}`,`cellUID=${cellBeingRemoved}`);
     if(JSON.parse(responseText).error){
       toggleLoadingScreen();
-      window.alert("the remove cell operation failed :( - is it really sad?...");
+      window.alert("the remove cell operation failed :( \n- is it really sad?...");
       cellBeingRemoved = "";
+      setCellClickableIndicator(false);
+      toggleDisableOnControlButtons();
     }
     else{
       location.reload();
     }
+  }
+  else{
+    setCellClickableIndicator(false);
+    toggleDisableOnControlButtons();
   }
 }
 
@@ -234,6 +244,12 @@ function clickCell(cell){
     setCellClickableIndicator(false);
     cell.classList.add("dtd-cell-being-edited");
     document.getElementById(`edit-${uid}`).contentEditable = "true";
+    document.getElementById(`edit-${uid}`).addEventListener("keypress",function(event){
+      if(event.code == "Enter"){
+        console.log(cellBeingEdited);
+        editCell();
+      }
+    })
     document.getElementById(`edit-${uid}`).focus();
   }
   else if(removeState){

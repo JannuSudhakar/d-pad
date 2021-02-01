@@ -2,10 +2,7 @@ function renderPad(dtd,js_path,errors,info){
   let cells = ""
   for(let i = 0; i < dtd.cells.length; i++){
     cell = dtd.cells[i];
-    console.log(cell.inlineStyle);
-    console.log(cell.inlineStyle.length);
     cells += `<div class=dtd-cell id=cell-${cell.uid} style="${cell.inlineStyle}" onclick="clickCell(this)">${cell.content}</div>\n`;
-    console.log(cells);
   }
   let tokenCells = ""
   for(var row = 1; row < dtd["num-rows"]+1; row++){
@@ -34,7 +31,7 @@ function renderPad(dtd,js_path,errors,info){
       <div id="control-bar">
         <button class="control-button" type="button" onclick="goHome()">🏠</button>
         <button data-activity-indicator="➕" data-return-indicator="✔️" class="control-button" type="button" onclick="newCell(this)">➕</button>
-        <button data-activity-indicator="🖋️" data-return-indicator="✔️" class="control-button" type="button" onclick="editCell(this)">🖋️</button>
+        <button data-activity-indicator="🖋️" data-return-indicator="✔️" id="edit-cell-button" class="control-button" type="button" onclick="editCell()">🖋️</button>
         <button data-activity-indicator="⛏️" data-return-indicator="✔️" class="control-button" type="button" onclick="repositionCell(this)">⛏️</button>
         <button data-activity-indicator="✖️" data-return-indicator="☠️" class="control-button" type="button" onclick="removeCell(this)">✖️</button>
         <button class="control-button" type="button" onclick="window.alert('not yet implemented :/')">▶</button>
