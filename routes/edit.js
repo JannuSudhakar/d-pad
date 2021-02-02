@@ -112,7 +112,7 @@ router.post('/remove/*',async function(req,res){
     index = dtd.cells.findIndex(function(cell){
       return cell.uid == req.body.cellUID;
     });
-    if(index = -1){
+    if(index == -1){
       res.json({
         error: true
       })
