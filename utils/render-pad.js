@@ -2,7 +2,7 @@ function renderPad(dtd,js_path,errors,info){
   let cells = ""
   for(let i = 0; i < dtd.cells.length; i++){
     cell = dtd.cells[i];
-    cells += `<div class=dtd-cell id=cell-${cell.uid} style="${cell.inlineStyle}" onclick="clickCell(this)">${cell.content}</div>\n`;
+    cells += `<div class=dtd-cell id=cell-${cell.uid} style="${cell.inlineStyle}" onclick="clickCell(this)" ondblclick="dblClickCell(this)">${cell.content}</div>\n`;
   }
   let tokenCells = ""
   for(var row = 1; row < dtd["num-rows"]+1; row++){

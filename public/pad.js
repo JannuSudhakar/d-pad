@@ -8,10 +8,19 @@ var removeState = false;
 var cellBeingRemoved = "";
 var cellPoppedOutState = false;
 
+var doubleClickIndicator = false;
+
 var rowSet1 = null;
 var rowSet2 = null;
 var colSet1 = null;
 var colSet2 = null;
+
+function sleep(ms) {
+  if(!ms){
+    ms = 0;
+  }
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
 
 function toggleLoadingScreen(forceState){
   if(forceState != null){
@@ -232,7 +241,14 @@ async function removeCell(x){
   }
 }
 
-function clickCell(cell){
+async function clickCell(cell){
+  if(!doubleClickIndicator){
+    await sleep(200);
+  }
+  else{
+    doubleClickIndicator = true;
+    return
+  }
   var uid = cell.id.substr(5);
   if(repositioningState){
     cellBeingRepositioned = uid;
@@ -269,6 +285,14 @@ function clickCell(cell){
     document.getElementById("board-cover-layer").style.display = "grid";
     toggleDisableOnControlButtons(true);
     cellPoppedOutState = true;
+  }
+}
+
+function dblClickCell(x){
+  if(!cellEditState && cellBeingEdited == ""){
+    doubleClickIndicator = true;
+    editCell();
+    clickCell(x);
   }
 }
 
