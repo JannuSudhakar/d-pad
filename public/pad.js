@@ -6,6 +6,8 @@ var cellBeingEdited = "";
 var loadingScreenState = false;
 var removeState = false;
 var cellBeingRemoved = "";
+var cellPoppedOutState = false;
+
 var rowSet1 = null;
 var rowSet2 = null;
 var colSet1 = null;
@@ -29,12 +31,15 @@ function toggleLoadingScreen(forceState){
 
 function toggleDisableOnControlButtons(x){
   //pass nothing to this function to activate all buttons.
+  //pass true here to disable all buttons.
   buttons = document.getElementsByClassName('control-button');
   if(x){
     for(var i = 0; i < buttons.length; i++){
       buttons[i].disabled = true;
     }
-    x.disabled = false;
+    if(x.disabled){
+      x.disabled = false;
+    }
   }
   else{
     for(var i = 0; i < buttons.length; i++){
@@ -239,24 +244,47 @@ function clickCell(cell){
     colSet2 = null;
     setGridVisibility(repositioningState);
   }
-  else if(cellEditState && cellBeingEdited == ""){
-    cellBeingEdited = uid;
-    setCellClickableIndicator(false);
-    cell.classList.add("dtd-cell-being-edited");
-    document.getElementById(`edit-${uid}`).contentEditable = "true";
-    document.getElementById(`edit-${uid}`).addEventListener("keypress",function(event){
-      if(event.code == "Enter"){
-        console.log(cellBeingEdited);
-        editCell();
-      }
-    })
-    document.getElementById(`edit-${uid}`).focus();
+  else if(cellEditState){
+    if(cellBeingEdited == ""){
+      cellBeingEdited = uid;
+      setCellClickableIndicator(false);
+      cell.classList.add("dtd-cell-being-edited");
+      document.getElementById(`edit-${uid}`).contentEditable = "true";
+      document.getElementById(`edit-${uid}`).addEventListener("keypress",function(event){
+        if(event.key == "Enter" && !event.shiftKey){
+          console.log(cellBeingEdited);
+          editCell();
+        }
+      })
+      document.getElementById(`edit-${uid}`).focus();
+    }
   }
   else if(removeState){
     cellBeingRemoved = uid;
     setCellClickableIndicator(false);
     cell.classList.add("dtd-cell-selected");
   }
+  else{
+    cell.classList.add("dtd-cell-popped-out");
+    document.getElementById("board-cover-layer").style.display = "grid";
+    toggleDisableOnControlButtons(true);
+    cellPoppedOutState = true;
+  }
+}
+
+function popBackIn(){
+  var poppedCells = document.getElementsByClassName("dtd-cell-popped-out");
+  if(poppedCells.length == 0){
+    window.alert("poppedCells.length == 0.\nReport to the developer.\nHopefully nothing broke");
+  }
+  else{
+    for(var i  = 0; i < poppedCells.length; i++){
+      poppedCells[i].classList.remove("dtd-cell-popped-out");
+    }
+  }
+  document.getElementById("board-cover-layer").style.display = "none";
+  toggleDisableOnControlButtons(false);
+  cellPoppedOutState = false;
 }
 
 function deleteFile(){
@@ -268,7 +296,7 @@ function deleteFile(){
       if(this.readyState == 4 && this.status == 200){
         toggleLoadingScreen();
         if(JSON.parse(this.responseText).error){
-          window.alert("there was an error deleting the file.\nfile: whew, that was a close one 😎");
+          window.alert('there was an error deleting the file.\nFile: "whew, that was a close one 😎"');
         }
         else{
           window.location.href = "/";
@@ -280,5 +308,12 @@ function deleteFile(){
   else{
     window.alert("you have chosen to not delete this file.")
   }
+}
 
+function bodyKeyPress(event){
+  if(event.key == "Escape"){
+    if(cellPoppedOutState){
+      popBackIn();
+    }
+  }
 }

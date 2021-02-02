@@ -22,7 +22,7 @@ function renderPad(dtd,js_path,errors,info){
       }
     </style>
   </head>
-  <body>
+  <body onkeydown="bodyKeyPress(event)">
     <div id="loading-screen">
       <p>loading...</p>
     </div>
@@ -37,6 +37,7 @@ function renderPad(dtd,js_path,errors,info){
         <button class="control-button" type="button" onclick="window.alert('not yet implemented :/')">▶</button>
         <button class="control-button" type="button" onclick="deleteFile()">🗑️</button>
       </div>
+      <div id="board-cover-layer" onclick="popBackIn()"></div>
       <div id="board">
         ${cells}
         ${tokenCells}
