@@ -52,7 +52,7 @@ router.post("/upload",async function(req,res){
     const dtd = convertFromString(stringified_dtd);
     const newDTDFile = new DTDFile(dtd);
     await newDTDFile.save();
-    res.send("success");
+    res.redirect("/");
   }
   catch(err){
     console.log(err);
