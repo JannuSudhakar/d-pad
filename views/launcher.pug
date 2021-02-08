@@ -14,6 +14,11 @@ html
     .launcher
       a.launcher-option(href="/new-file") +__+ &nbsp NEW &nbsp +__+
       
+      form.launcher-upload-form.launcher-option(action="/file-management/upload" method="POST" enctype="multipart/form-data")
+        label.launcher-elements Upload Existing File:
+        input.launcher-elements(type="file" name="upload-dtd")
+        button.launcher-elements(type="submit") upload
+      
       h3.launcher-heading Existing Files
       
       .existing-filelist 

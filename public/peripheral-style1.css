@@ -37,6 +37,23 @@ a{
   text-align: center;
 }
 
+form.launcher-upload-form{
+  padding: 0px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  place-items: stretch;
+  background: #E8FFE8;
+}
+
+.launcher-elements{
+  border: 1px solid lightgreen;
+  margin: 0px;
+  padding: 10px;
+  border-radius: 10px;
+  text-align: center;
+  background: #E8FFE8;
+}
+
 .spanning-message{
   grid-column-start: 1;
   grid-column-end: -1;

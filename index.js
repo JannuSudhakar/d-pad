@@ -68,6 +68,7 @@ app.post('/new-file',async function(req,res){
 
 app.use('/pad',require('./routes/pad'));
 app.use('/edit',require('./routes/edit'));
+app.use('/file-management',require('./routes/file-management'));
 
 const port = process.env.PORT || 8000
 

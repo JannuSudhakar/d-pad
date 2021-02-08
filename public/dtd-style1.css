@@ -7,6 +7,7 @@ body{
   padding: 0;
 }
 #dtd-holder{
+  overflow: hidden;
   height: 100vh;
   width: 100vw;
   display: grid;
@@ -109,6 +110,8 @@ body{
   padding: 0;
   border: 1px solid gray;
   border-radius: 5px;
+  display: grid;
+  place-content: center;
 }
 
 .control-button:disabled{

@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
 const DTDSchema = mongoose.Schema({
+  version: Number,
   "created-by": {
     "name": String,
     "ip-address": String,

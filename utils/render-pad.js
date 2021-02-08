@@ -34,6 +34,7 @@ function renderPad(dtd,js_path,errors,info){
         <button data-activity-indicator="🖋️" data-return-indicator="✔️" id="edit-cell-button" class="control-button" type="button" onclick="editCell()">🖋️</button>
         <button data-activity-indicator="⛏️" data-return-indicator="✔️" class="control-button" type="button" onclick="repositionCell(this)">⛏️</button>
         <button data-activity-indicator="✖️" data-return-indicator="☠️" class="control-button" type="button" onclick="removeCell(this)">✖️</button>
+        <a class="control-button" href="/file-management/download/${dtd.name}.dtd?url=${dtd.url}" download>⤓</a>
         <button class="control-button" type="button" onclick="window.alert('not yet implemented :/')">▶</button>
         <button class="control-button" type="button" onclick="deleteFile()">🗑️</button>
       </div>

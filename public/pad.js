@@ -341,3 +341,13 @@ function bodyKeyPress(event){
     }
   }
 }
+
+async function downloadFile(){
+  response = JSON.parse(await sendPOST( `/file-management/download/${dtd_url}`));
+  if(response.error){
+    window.alert("the download failed :(");
+    return
+  }
+  stringified_dtd = response.stringified_dtd;
+  window.alert(stringified_dtd);
+}
