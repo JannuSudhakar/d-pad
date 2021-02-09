@@ -23,7 +23,7 @@ function preprocess(dtd){
         return {
           uid: cell.uid,
           inlineStyle: inlineStyle,
-          content: `<p id=edit-${cell.uid}>${cell.content.replace(/\n/g,'<br>')}</p>` //TODO IMPORTANT: implement escaping
+          content: `<p id=edit-${cell.uid}>${cell.content.replace(/</g,'&lt;').replace(/>/,'&gt;').replace(/\n/g,'<br>')}</p>` //escaped greater than and less than
         };
       }
     }
