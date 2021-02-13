@@ -1,4 +1,4 @@
-function renderPad(dtd,js_path,errors,info){
+function renderPad(dtd,js_path,language_specific_info,errors,info){
   let cells = ""
   for(let i = 0; i < dtd.cells.length; i++){
     cell = dtd.cells[i];
@@ -29,14 +29,14 @@ function renderPad(dtd,js_path,errors,info){
     <div id="dtd-holder">
       <h1 id="overall-heading"> ${dtd.name} </h1>
       <div id="control-bar">
-        <button class="control-button" type="button" onclick="goHome()">🏠</button>
-        <button data-activity-indicator="➕" data-return-indicator="✔️" class="control-button" type="button" onclick="newCell(this)">➕</button>
-        <button data-activity-indicator="🖋️" data-return-indicator="✔️" id="edit-cell-button" class="control-button" type="button" onclick="editCell()">🖋️</button>
-        <button data-activity-indicator="⛏️" data-return-indicator="✔️" class="control-button" type="button" onclick="repositionCell(this)">⛏️</button>
-        <button data-activity-indicator="✖️" data-return-indicator="☠️" class="control-button" type="button" onclick="removeCell(this)">✖️</button>
-        <a class="control-button" href="/file-management/download/${dtd.name}.dtd?url=${dtd.url}" download>⤓</a>
-        <button class="control-button" type="button" onclick="window.alert('not yet implemented :/')">▶</button>
-        <button class="control-button" type="button" onclick="deleteFile()">🗑️</button>
+        <button class="control-button" type="button" onclick="goHome()" title="${language_specific_info["home-button-label"]}">🏠</button>
+        <button data-activity-indicator="➕" data-return-indicator="✔️" class="control-button" type="button" onclick="newCell(this)" title="${language_specific_info["new-cell-label"]}">➕</button>
+        <button data-activity-indicator="🖋️" data-return-indicator="✔️" id="edit-cell-button" class="control-button" type="button" onclick="editCell()" title="${language_specific_info["edit-cell-label"]}">🖋️</button>
+        <button data-activity-indicator="⛏️" data-return-indicator="✔️" class="control-button" type="button" onclick="repositionCell(this)" title="${language_specific_info["reposition-cell-label"]}">⛏️</button>
+        <button data-activity-indicator="✖️" data-return-indicator="☠️" class="control-button" type="button" onclick="removeCell(this)" title="${language_specific_info["remove-cell-label"]}">✖️</button>
+        <a class="control-button" href="/file-management/download/${dtd.name}.dtd?url=${dtd.url}" download title="${language_specific_info["download-file-label"]}">⤓</a>
+        <button class="control-button" type="button" onclick="window.alert('not yet implemented :/')" title="not yet implemented">▶</button>
+        <button class="control-button" type="button" onclick="deleteFile()" title="${language_specific_info["delete-file-label"]}">🗑️</button>
       </div>
       <div id="board-cover-layer" onclick="popBackIn()"></div>
       <div id="board">

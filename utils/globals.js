@@ -2,6 +2,16 @@ validCellTypes = [
   "paragraph"
 ]
 
+english = {
+  "home-button-label": "home",
+  "new-cell-label": "new cell",
+  "edit-cell-label": "edit cell",
+  "reposition-cell-label": "reposition cell",
+  "remove-cell-label": "remove cell",
+  "delete-file-label": "delete file",
+  "download-file-label": "download file"
+}
+
 nouns = [
 "area",
 "book",
@@ -111,5 +121,6 @@ adjectives = [
 module.exports = {
   validCellTypes: validCellTypes,
   nouns: nouns,
-  adjectives: adjectives
+  adjectives: adjectives,
+  english
 }
