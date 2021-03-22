@@ -8,8 +8,8 @@ body{
 }
 #dtd-holder{
   overflow: hidden;
-  height: 100vh;
-  width: 100vw;
+  height: 100%;
+  width: 100%;
   display: grid;
   grid-template-columns: 50px 1fr 45px;
   grid-template-rows: 100vh;
@@ -27,7 +27,7 @@ body{
 
 }
 
-#control-bar{
+.control-bar{
   grid-area: control-bar;
   display: grid;
   grid-template-rows: auto;
@@ -120,4 +120,22 @@ body{
 
 .cell-marker{
   border: 1px solid orange;
+}
+
+#rotatemsg{
+  display: none;
+}
+
+@media only screen and (orientation:portrait){
+  #rotatemsg{
+    height: 100vh;
+    width: 100vw;
+    display: grid;
+    position: absolute;
+    place-content: center;
+    font-size: 40px;
+    background: #000000dd;
+    z-index: 100000;
+    color: white;
+  }
 }

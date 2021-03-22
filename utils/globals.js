@@ -1,5 +1,6 @@
 validCellTypes = [
-  "paragraph"
+  "paragraph",
+  "math"
 ]
 
 english = {
@@ -9,7 +10,11 @@ english = {
   "reposition-cell-label": "reposition cell",
   "remove-cell-label": "remove cell",
   "delete-file-label": "delete file",
-  "download-file-label": "download file"
+  "download-file-label": "download file",
+  "cell-type-selector-paragraph-label": "set cell-type to paragraph (default)",
+  "cell-type-selector-math-label": "set cell-type to math",
+  "pop-out-cell-label": "pop the cell in and out",
+  "global-escape-label": "abort current operation"
 }
 
 nouns = [

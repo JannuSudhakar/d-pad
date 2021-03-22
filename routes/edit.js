@@ -90,6 +90,8 @@ router.post('/edit/*',async function(req,res){
     index = dtd.cells.findIndex(function(cell){
       return cell.uid == req.body.cellUID;
     })
+    console.log(req.body);
+    dtd.cells[index]['cell-type'] = req.body['celltype'];
     dtd.cells[index].content = req.body.content.replace(/</g,"&lt;").replace(/>/g,"&gt;");
     dtd.cells[index]["last-edited-by"] = generateUserStamp(req);
     await dtd.save();

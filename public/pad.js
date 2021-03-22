@@ -1,3 +1,7 @@
+//global constants
+validCellTypes = ["paragraph","math"];
+
+//state variables
 var gridMarkerState = false;
 var repositioningState = false;
 var cellBeingRepositioned = "";
@@ -66,6 +70,14 @@ function toggleIcon(x){
   else{
     x.innerHTML = returnIndicator;
   }
+}
+
+function toggleContolBar(id){
+  var bars = document.getElementsByClassName('control-bar');
+  for(var i = 0; i < bars.length; i++){
+    bars[i].style.display = "none";
+  }
+  document.getElementById(id).style.display = "";
 }
 
 function setGridVisibility(visibility){
@@ -183,19 +195,29 @@ async function repositionCell(x){
 
 async function editCell(){
   x = document.getElementById('edit-cell-button');
-  toggleDisableOnControlButtons(x);
-  toggleIcon(x);
+  toggleContolBar("edit-cell-control-bar");
+  //properly initializing the edit-cell control bar
+  toggleDisableOnControlButtons(true);
+  document.getElementById("abort-edit-button").disabled = false;
+  document.getElementById("edit-cell-submit-button").disabled = false;
   cellEditState = !cellEditState;
   if(cellEditState){
     setCellClickableIndicator(true);
   }
-  else if(cellBeingEdited != ""){
+  else{
+    theGlobalEscape();
+  }
+}
+
+async function editCellSubmit(){
+  if(cellBeingEdited != ""){
+    var cellType = document.getElementById(`cell-${cellBeingEdited}`).getAttribute('data-cell-type');
     var content = document.getElementById(`edit-${cellBeingEdited}`).innerHTML;
     content = content.replace(/<br>/g,"\n");
     content = content.replace(/<div>/g,"\n");
     content = content.replace(/<\/div>/g,"");
     toggleLoadingScreen();
-    responseText = await sendPOST(`/edit/edit/${dtd_url}`,`cellUID=${cellBeingEdited}&content=${encodeURIComponent(content)}`);
+    responseText = await sendPOST(`/edit/edit/${dtd_url}`,`cellUID=${cellBeingEdited}&content=${encodeURIComponent(content)}&celltype=${cellType}`);
     if(JSON.parse(responseText).error){
       toggleLoadingScreen();
       toggleDisableOnControlButtons();
@@ -207,9 +229,27 @@ async function editCell(){
     }
   }
   else{
-    window.alert(cellBeingEdited);
     toggleDisableOnControlButtons();
     setCellClickableIndicator();
+  }
+}
+
+function setCellType(type){
+  if(cellBeingEdited == ""){
+    theGlobalEscape();
+  }
+  else{
+    console.log(cellBeingEdited);
+    var cell = document.getElementById(`cell-${cellBeingEdited}`);
+    cell.setAttribute("data-cell-type",type);
+    for(var i = 0; i < validCellTypes.length; i++){
+      if(validCellTypes[i] != type){
+        document.getElementById(`cell-type-selector-button-${validCellTypes[i]}`).disabled = false;
+      }
+      else{
+        document.getElementById(`cell-type-selector-button-${validCellTypes[i]}`).disabled = true;
+      }
+    }
   }
 }
 
@@ -266,10 +306,22 @@ async function clickCell(cell){
       setCellClickableIndicator(false);
       cell.classList.add("dtd-cell-being-edited");
       document.getElementById(`edit-${uid}`).contentEditable = "true";
+      cellType = cell.getAttribute('data-cell-type');
+      for(var i = 0; i < validCellTypes.length; i++){
+        if(validCellTypes[i] != cellType){
+          document.getElementById(`cell-type-selector-button-${validCellTypes[i]}`).disabled = false;
+        }
+      }
+      if(cellType == "math"){
+        var children = cell.children;
+        for(var i = 0; i < children.length; i++){
+          children[i].style.display = "none";
+        }
+        document.getElementById(`edit-${uid}`).style.display = "";
+      }
       document.getElementById(`edit-${uid}`).addEventListener("keypress",function(event){
         if(event.key == "Enter" && !event.shiftKey){
-          console.log(cellBeingEdited);
-          editCell();
+          editCellSubmit();
         }
       })
       document.getElementById(`edit-${uid}`).focus();
@@ -339,6 +391,9 @@ function bodyKeyPress(event){
     if(cellPoppedOutState){
       popBackIn();
     }
+    else{
+      theGlobalEscape();
+    }
   }
 }
 
@@ -350,4 +405,24 @@ async function downloadFile(){
   }
   stringified_dtd = response.stringified_dtd;
   window.alert(stringified_dtd);
+}
+
+async function theGlobalEscape(){
+  //I am lazy, very lazy. If you have a problem with that come and kill me.
+  I_dont_know_why_this_is_needed = JSON.parse(await sendPOST( `/`));
+  location.reload();
+}
+
+function makeScrollable(x){
+  children = x.children;
+  for(var i = 0; i < children.length; i++){
+    children[i].style.overflow = "auto";
+  }
+}
+
+function undoScrollable(x){
+  var children = x.children;
+  for(var i = 0; i < children.length; i++){
+    children[i].style.overflow = "";
+  }
 }

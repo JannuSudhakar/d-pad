@@ -9,7 +9,9 @@
   "author": "Jannu Sudhakar",
   "license": "ISC",
   "dependencies": {
+    "esm": "^3.2.25",
     "express": "^4.17.1",
+    "mathjax-full": "^3.1.2",
     "mongoose": "^5.11.8",
     "multer": "^1.4.2",
     "nodemon": "^2.0.6",

@@ -48,6 +48,9 @@ app.get('/',async function(req,res){
     res.render('launcher',{existing_filelist:existing_filelist});
 });
 
+app.post('/',function(req,res){
+  res.json({error:false});
+})
 app.get('/new-file',function(req,res){
   const randName = chooseRand(adjectives) + " " + chooseRand(nouns);
   res.render('new-file',{randName: randName});
