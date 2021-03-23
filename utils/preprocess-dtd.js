@@ -38,7 +38,6 @@ function preprocess(dtd){
   ${adaptor.textContent(MathJax.chtmlStylesheet())}
   `;
   cells = dtd.cells.map(function(cell){
-    console.log(cell['cell-type']);
     if(validCellTypes.reduce(function(ret,elt){
       return ret || elt == cell['cell-type'];
     },false)){
@@ -71,9 +70,7 @@ function preprocess(dtd){
           type: "math",
           inlineStyle: inlineStyle,
           content: `
-          <p style="display: none;" id=edit-${cell.uid}>
-          ${cell.content.replace(/</g,'&lt;').replace(/>/,'&gt;').replace(/\n/g,'<br>')}
-          <p>
+          <p style="display: none;" id=edit-${cell.uid}>${cell.content.replace(/</g,'&lt;').replace(/>/,'&gt;').replace(/\n/g,'<br>')}<p>
           ${math}
           `
         };

@@ -409,7 +409,7 @@ async function downloadFile(){
 
 async function theGlobalEscape(){
   //I am lazy, very lazy. If you have a problem with that come and kill me.
-  I_dont_know_why_this_is_needed = JSON.parse(await sendPOST( `/`));
+  I_dont_know_why_this_is_needed = JSON.parse(await sendPOST(`/`));
   location.reload();
 }
 
