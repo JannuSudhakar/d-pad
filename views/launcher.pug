@@ -2,6 +2,7 @@ html
   head
     title D-Pad-Launcher
     link(rel="stylesheet",type="text/css",href="/peripheral-style1.css")
+    base(href=baseurl)
 
   body
     if info
@@ -12,7 +13,7 @@ html
         p= x
 
     .launcher
-      a.launcher-option(href="/new-file") +__+ &nbsp NEW &nbsp +__+
+      a.launcher-option(href="/new-file") +__+ &nbsp NEW&nbspFILE &nbsp +__+
       
       form.launcher-upload-form.launcher-option(action="/file-management/upload" method="POST" enctype="multipart/form-data")
         label.launcher-elements Upload Existing File:

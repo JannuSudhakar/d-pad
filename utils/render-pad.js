@@ -1,4 +1,4 @@
-function renderPad(dtd,js_path,language_specific_info,errors,info){
+function renderPad(baseurl,dtd,js_path,language_specific_info,errors,info){
   let cells = ""
   for(let i = 0; i < dtd.cells.length; i++){
     cell = dtd.cells[i];
@@ -20,6 +20,7 @@ function renderPad(dtd,js_path,language_specific_info,errors,info){
   return `<html>
   <head>
     <title>${dtd.name}</title>
+    <base href="${baseurl || '/'}">
     <link rel="stylesheet" type="text/css" href="/dtd-style1.css">
     <style>${dtd.style}</style>
     <style id="cell-marker-style">
@@ -47,7 +48,7 @@ function renderPad(dtd,js_path,language_specific_info,errors,info){
       </div>
       <div class="control-bar" id="edit-cell-control-bar" style="display: none">
         <button id="cell-type-selector-button-paragraph" class="control-button" type="button" onclick="setCellType('paragraph')" title="${language_specific_info["cell-type-selector-paragraph-label"]}">&lt;p&gt;</button>
-        <button id="cell-type-selector-button-math" class="control-button" type="button" onclick="setCellType('math')" title="${language_specific_info["cell-type-selector-math-label"]}">Tex</button>
+        <!-- <button id="cell-type-selector-button-math" class="control-button" type="button" onclick="setCellType('math')" title="${language_specific_info["cell-type-selector-math-label"]}">Tex</button> --!>
         <button id="edit-cell-submit-button" class="control-button" type="button" onclick="editCellSubmit()" title="${language_specific_info["edit-cell-label"]}">✔️</button>
         <button data-activity-indicator="⬆️" data-return-indicator="↓" class="control-button" type="button" onclick="popCellBeingEdited()" title="${language_specific_info["pop-out-cell-label"]}">⬆️</button>
         <button id="abort-edit-button" class="control-button" type="button" onclick="theGlobalEscape()" title="${language_specific_info["global-escape-label"]}">🚫</button>

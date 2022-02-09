@@ -10,7 +10,7 @@ router.get('/internal/*',async function(req,res){
   try{
     uid = req.url.substr(10);
     dtd = await DTDFile.findOne({"url":uid});
-    res.send(renderPad(preprocess(dtd),"/",english));
+    res.send(renderPad(process.env.BASE_URL,preprocess(dtd),"/",english));
   }
   catch(err){
     console.log(err);

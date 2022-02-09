@@ -45,7 +45,7 @@ app.get('/',async function(req,res){
       return {name: dtd.name, link: "/pad/internal/"+dtd.url}
     });
     //console.log(existing_filelist)
-    res.render('launcher',{existing_filelist:existing_filelist});
+    res.render('launcher',{baseurl:process.env.BASE_URL || '/', existing_filelist:existing_filelist});
 });
 
 app.post('/',function(req,res){
@@ -53,7 +53,7 @@ app.post('/',function(req,res){
 })
 app.get('/new-file',function(req,res){
   const randName = chooseRand(adjectives) + " " + chooseRand(nouns);
-  res.render('new-file',{randName: randName});
+  res.render('new-file',{baseurl:process.env.BASE_URL || '/', randName: randName});
 })
 
 app.post('/new-file',async function(req,res){
