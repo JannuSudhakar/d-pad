@@ -1,7 +1,7 @@
 html
   head
     title D-Pad-Launcher
-    link(rel="stylesheet",type="text/css",href="/peripheral-style1.css")
+    link(rel="stylesheet",type="text/css",href="peripheral-style1.css")
     base(href=baseurl)
 
   body
@@ -13,16 +13,16 @@ html
         p= x
 
     .launcher
-      a.launcher-option(href="/new-file") +__+ &nbsp NEW&nbspFILE &nbsp +__+
-      
-      form.launcher-upload-form.launcher-option(action="/file-management/upload" method="POST" enctype="multipart/form-data")
+      a.launcher-option(href="new-file") +__+ &nbsp NEW&nbspFILE &nbsp +__+
+
+      form.launcher-upload-form.launcher-option(action="file-management/upload" method="POST" enctype="multipart/form-data")
         label.launcher-elements Upload Existing File:
         input.launcher-elements(type="file" name="upload-dtd")
         button.launcher-elements(type="submit") upload
-      
+
       h3.launcher-heading Existing Files
-      
-      .existing-filelist 
+
+      .existing-filelist
         if(existing_filelist.length == 0)
           p.spanning-message.launcher-option No Files Yet
         each f, i in existing_filelist

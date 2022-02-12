@@ -1,8 +1,8 @@
 html
   head
     title DTD-New
-    link(rel="stylesheet",type="text/css",href="/peripheral-style1.css")
-    link#dtd-style(rel="stylesheet",type="text/css",href="/dtd-style1.css")
+    link(rel="stylesheet",type="text/css",href="peripheral-style1.css")
+    link#dtd-style(rel="stylesheet",type="text/css",href="dtd-style1.css")
     style#base-style
     base(href=baseurl)
 
@@ -19,40 +19,40 @@ html
         h1#overall-heading sample-heading
         #control-bar
         #board
-    
-    #actual-page  
+
+    #actual-page
       h1.centered-bar-heading And so the journey begins... with breath as deep as your eyes can see and eyes as wide as the horizon, the legs beginning to realize the weight on their shoulders as the lips begin to bend.
-      
-      form.two-column-form(action = "/new-file", method="POST", onsubmit="return validateForm()")
+
+      form.two-column-form(action = "new-file", method="POST", onsubmit="return validateForm()")
         label.two-column-form-label Name
         input.two-column-form-input#name(type="text",name="name",value=randName)
-          
+
         label.two-column-form-label grid rows
         input.two-column-form-input#grid-rows(type="number",name="grid-rows",value=20)
-          
+
         label.two-column-form-label grid columns
         input.two-column-form-input#grid-columns(type="number",name="grid-columns",value=20)
-        
+
         label.two-column-form-label your name (will no longer be required once I implement accounts)
         input.two-column-form-input#your-name(type="text",name="your-name")
-        
+
         button.two-column-form-spanning-button(type="submit",value="Submit") ~~let's go!!~~
-        
+
         button.two-column-form-spanning-button(type="button",value="cancel",onclick="goHome()") 😥😔cancel, let's go back home😔😥
-      
+
       button.full-width-button(onclick="preview()") preview
-        
+
   script.
     var randName = "!{randName}";
-    
+
     document.getElementById("name").value = randName;
     document.getElementById("grid-rows").value = 20;
     document.getElementById("grid-columns").value = 20;
-    
+
     function goHome(){
-      window.location.href = "/";
+      window.location.href = "!{baseurl}";
     }
-    
+
     function validateForm(){
       var errorText = "";
       if(document.getElementById("name").value == ""){
@@ -73,7 +73,7 @@ html
       }
       return true;
     }
-    
+
     function preview(){
       //This will probably be replaced by a request to the server later
       numrows = document.getElementById("grid-rows").value;
@@ -84,7 +84,7 @@ html
       }
       document.getElementById("board").innerHTML = cellsHTML;
       document.getElementById("overall-heading").innerHTML = document.getElementById("name").value || "sample heading";
-      document.getElementById("base-style").innerHTML = 
+      document.getElementById("base-style").innerHTML =
       `#board{
         grid-template-rows: repeat(${numrows}, auto);
         grid-template-columns: repeat(${numcols}, auto);
@@ -93,7 +93,7 @@ html
       document.getElementById("actual-page").style.display = "none";
       window.alert("hit escape to return to the menu");
     }
-    
+
     window.addEventListener("keydown",function(e){
       if(e.key == "Escape" || e.key == "Esc"){
         document.getElementById("preview-layout").style.display = "none";
